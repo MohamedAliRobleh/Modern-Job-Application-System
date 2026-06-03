@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth, useClerk } from '@clerk/clerk-react'
 import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
 const ORG_NAME = import.meta.env.VITE_ORG_NAME || 'Careers'
 
@@ -17,8 +18,12 @@ export default function Navbar() {
   }, [])
 
   const handleSignOut = async () => {
-    await signOut()
-    navigate('/')
+    try {
+      await signOut()
+      navigate('/')
+    } catch {
+      toast.error('Sign out failed. Please try again.')
+    }
   }
 
   return (
