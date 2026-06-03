@@ -32,4 +32,15 @@ describe('GET /api/jobs', () => {
 
     expect(res.status).toHaveBeenCalledWith(405)
   })
+
+  it('returns 500 when database throws', async () => {
+    mockQuery.mockRejectedValue(new Error('DB connection failed'))
+
+    const req = { method: 'GET' }
+    const res = { status: vi.fn().mockReturnThis(), json: vi.fn() }
+
+    await handler(req, res)
+
+    expect(res.status).toHaveBeenCalledWith(500)
+  })
 })
