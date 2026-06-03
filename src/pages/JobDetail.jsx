@@ -17,9 +17,13 @@ export default function JobDetail() {
     getJob(id).then(setJob).catch(() => setError('Job not found.')).finally(() => setLoading(false))
   }, [id])
 
-  const handleShare = () => {
-    navigator.clipboard.writeText(window.location.href)
-    toast.success('Link copied to clipboard!')
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href)
+      toast.success('Link copied to clipboard!')
+    } catch {
+      toast.error('Could not copy link.')
+    }
   }
 
   return (

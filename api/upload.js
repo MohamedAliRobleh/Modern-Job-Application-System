@@ -1,4 +1,3 @@
-// api/upload.js
 import { put } from '@vercel/blob'
 import Busboy from 'busboy'
 
@@ -18,9 +17,11 @@ export default async function handler(req, res) {
 
   return new Promise((resolve) => {
     const bb = Busboy({ headers: req.headers })
-    let fileUploaded = false
+    let fileReceived = false
+    let uploadDone = false
 
     bb.on('file', async (fieldname, stream, info) => {
+      fileReceived = true
       const { filename, mimeType } = info
 
       if (!ALLOWED_TYPES.includes(mimeType)) {
@@ -36,7 +37,9 @@ export default async function handler(req, res) {
         size += chunk.length
         if (size > MAX_SIZE) {
           stream.destroy()
-          res.status(400).json({ error: 'File must be 5MB or smaller' })
+          if (!res.writableEnded) {
+            res.status(400).json({ error: 'File must be 5MB or smaller' })
+          }
           resolve()
           return
         }
@@ -46,25 +49,25 @@ export default async function handler(req, res) {
       stream.on('end', async () => {
         if (res.writableEnded) return
         const buffer = Buffer.concat(chunks)
-        const safeName = filename.replace(/[^a-zA-Z0-9.\-_]/g, '-')
+        const safeName = (filename || 'upload').replace(/[^a-zA-Z0-9.\-_]/g, '-')
         try {
           const blob = await put(`resumes/${Date.now()}-${safeName}`, buffer, {
             access: 'public',
             token: process.env.BLOB_READ_WRITE_TOKEN,
             contentType: mimeType,
           })
-          fileUploaded = true
+          uploadDone = true
           res.json({ url: blob.url })
-          resolve()
         } catch {
-          res.status(500).json({ error: 'Upload failed' })
+          if (!res.writableEnded) res.status(500).json({ error: 'Upload failed' })
+        } finally {
           resolve()
         }
       })
     })
 
     bb.on('finish', () => {
-      if (!fileUploaded && !res.writableEnded) {
+      if (!fileReceived && !res.writableEnded) {
         res.status(400).json({ error: 'No file provided' })
         resolve()
       }

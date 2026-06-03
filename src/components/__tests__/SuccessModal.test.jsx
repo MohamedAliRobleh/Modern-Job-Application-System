@@ -7,6 +7,10 @@ import SuccessModal from '../SuccessModal'
 const props = { show: true, name: 'Jane Doe', jobTitle: 'Software Engineer', onClose: vi.fn() }
 
 describe('SuccessModal', () => {
+  beforeEach(() => {
+    props.onClose.mockClear()
+  })
+
   it('renders name and job title when show=true', () => {
     render(<MemoryRouter><SuccessModal {...props} /></MemoryRouter>)
     expect(screen.getByText(/Jane Doe/)).toBeInTheDocument()

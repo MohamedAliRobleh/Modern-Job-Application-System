@@ -65,8 +65,8 @@ export default function ApplicationForm({ job }) {
           <h5 className="fw-bold mb-3" style={{ fontFamily: 'Plus Jakarta Sans, sans-serif', color: 'var(--primary)' }}>Position Details</h5>
           <div className="row g-3">
             <div className="col-12">
-              <label className="form-label fw-semibold">Position</label>
-              <input className="form-control bg-light" value={job.title} readOnly />
+              <label htmlFor="position" className="form-label fw-semibold">Position</label>
+              <input id="position" className="form-control bg-light" value={job.title} readOnly />
             </div>
             <div className="col-12 col-md-6">
               <label htmlFor="years_experience" className="form-label fw-semibold">Years of Experience *</label>
