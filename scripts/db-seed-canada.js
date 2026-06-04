@@ -5,204 +5,228 @@ const sql = neon(process.env.DATABASE_URL)
 
 const JOBS = [
   {
-    title: 'Ingénieur(e) Frontend Senior',
-    department: 'Ingénierie',
+    title: 'Senior Frontend Engineer',
+    department: 'Engineering',
     location: 'Remote — Canada',
     type: 'Full-time',
-    description: `Vous rejoindrez notre équipe produit pour concevoir et développer des interfaces rapides, accessibles et élégantes utilisées par des centaines de milliers de Canadiens. Vous travaillerez en étroite collaboration avec nos designers, ingénieurs backend et gestionnaires de produits pour façonner l'architecture frontend de notre plateforme principale.
+    description: `Join our product team to design and build fast, accessible, and beautiful interfaces used by hundreds of thousands of Canadians. You will work closely with designers, backend engineers, and product managers to shape the frontend architecture of our flagship platform.
 
-Vos responsabilités :
-• Concevoir et implémenter des fonctionnalités complexes en React et TypeScript
-• Assurer la performance, l'accessibilité (WCAG 2.1 AA) et la qualité du code
-• Participer aux revues de code et au mentorat des développeurs juniors
-• Contribuer au design system et à sa documentation
-• Optimiser les Core Web Vitals et les métriques de performance
+Responsibilities:
+• Design and implement complex features in React and TypeScript
+• Champion performance, accessibility (WCAG 2.1 AA), and code quality across the codebase
+• Lead code reviews and mentor junior developers
+• Contribute to our design system and its documentation
+• Monitor and improve Core Web Vitals and key performance metrics
 
-Nous sommes une équipe remote-first distribuée à travers le Canada. Chaque voix est entendue et chaque idée est considérée.`,
-    requirements: `• 5+ ans d'expérience en développement frontend
-• Maîtrise avancée de React, TypeScript et CSS moderne
-• Expérience avec les tests (Vitest, Cypress, Testing Library)
-• Solide compréhension de la performance web et du rendu côté serveur
-• Capacité à collaborer efficacement en contexte remote
-• Atout : expérience avec Next.js, Vite ou des bundlers modernes`,
-    salary_range: '110 000 $ – 145 000 $ CAD',
+We are a remote-first team distributed across Canada. Every voice is heard and every idea is considered.`,
+    requirements: `• 5+ years of frontend development experience
+• Advanced proficiency in React, TypeScript, and modern CSS
+• Strong experience with testing tools (Vitest, Cypress, Testing Library)
+• Deep understanding of web performance and server-side rendering
+• Ability to collaborate effectively in a remote-first environment
+• Nice to have: experience with Next.js, Vite, or modern bundlers`,
+    salary_range: '$110,000 – $145,000 CAD',
   },
   {
-    title: 'Ingénieur(e) Backend — Node.js & PostgreSQL',
-    department: 'Ingénierie',
+    title: 'Senior Backend Engineer — Node.js & PostgreSQL',
+    department: 'Engineering',
     location: 'Toronto, ON',
     type: 'Full-time',
-    description: `Notre équipe backend cherche un(e) ingénieur(e) passionné(e) pour construire les APIs et pipelines de données qui alimentent notre plateforme à haute disponibilité. Vous travaillerez sur des systèmes distribués traitant des millions de requêtes par jour.
+    description: `Our backend team is looking for a passionate engineer to build the APIs and data pipelines that power our high-availability platform. You will work on distributed systems processing millions of requests per day.
 
-Vos responsabilités :
-• Concevoir et développer des APIs RESTful et GraphQL performantes
-• Optimiser les requêtes PostgreSQL et architecturer les schémas de données
-• Mettre en place des pipelines de traitement de données en temps réel
-• Assurer la fiabilité des services (SLA 99,9 %) via des pratiques SRE
-• Intégrer des services tiers (Stripe, Twilio, etc.) de façon sécurisée
-• Participer aux astreintes (rotation équitable, indemnisée)
+Responsibilities:
+• Design and build high-performance RESTful and GraphQL APIs
+• Optimize PostgreSQL queries and architect database schemas
+• Build real-time data processing pipelines
+• Ensure service reliability (99.9% SLA) through SRE practices
+• Integrate third-party services (Stripe, Twilio, etc.) securely
+• Participate in on-call rotations (equitable, compensated schedule)
 
-Bureau au coeur du quartier financier de Toronto, à deux pas du métro King. Télétravail possible 3 jours/semaine.`,
-    requirements: `• 4+ ans d'expérience backend (Node.js, Go ou Python)
-• Maîtrise de PostgreSQL — indexation, transactions, optimisation
-• Expérience avec des architectures microservices et systèmes distribués
-• Bonne connaissance des pratiques de sécurité (OAuth 2.0, JWT, OWASP)
-• Familiarité avec AWS ou GCP (Lambda, RDS, Cloud Run)
-• Atout : expérience avec Kafka, Redis ou Temporal`,
-    salary_range: '105 000 $ – 140 000 $ CAD',
+Our Toronto office is located in the heart of the Financial District, steps from King Station. Hybrid remote available 3 days per week.`,
+    requirements: `• 4+ years of backend experience (Node.js, Go, or Python)
+• Strong command of PostgreSQL — indexing, transactions, query optimization
+• Experience with microservices and distributed system architectures
+• Solid knowledge of security best practices (OAuth 2.0, JWT, OWASP)
+• Familiarity with AWS or GCP (Lambda, RDS, Cloud Run)
+• Nice to have: experience with Kafka, Redis, or Temporal`,
+    salary_range: '$105,000 – $140,000 CAD',
   },
   {
-    title: 'Concepteur(trice) de Produits Senior',
+    title: 'Senior Product Designer',
     department: 'Design',
     location: 'Montréal, QC',
     type: 'Full-time',
-    description: `Nous cherchons un(e) designer de produits expérimenté(e) pour façonner l'expérience visuelle et interactive de notre plateforme. Vous serez le pont entre les besoins des utilisateurs et la réalité technique, de la recherche jusqu'à la livraison pixel-perfect.
+    description: `We are looking for an experienced product designer to shape the visual and interactive experience of our platform. You will be the bridge between user needs and technical reality, driving work from research all the way through to pixel-perfect delivery.
 
-Vos responsabilités :
-• Mener des recherches utilisateurs (entretiens, tests d'utilisabilité, A/B tests)
-• Concevoir des maquettes et prototypes dans Figma pour les nouvelles fonctionnalités
-• Maintenir et faire évoluer notre design system (composants, tokens, documentation)
-• Collaborer avec les équipes ingénierie et produit dès la phase de découverte
-• Défendre les intérêts des utilisateurs dans les décisions produit
-• Présenter vos décisions de design aux parties prenantes avec clarté
+Responsibilities:
+• Lead user research — interviews, usability testing, A/B experiments
+• Create wireframes and high-fidelity prototypes in Figma for new features
+• Maintain and evolve our design system (components, tokens, documentation)
+• Collaborate with engineering and product from early discovery through launch
+• Advocate for user needs in product decisions
+• Present design decisions clearly to stakeholders at all levels
 
-Notre équipe design est petite et impactante — vous aurez une influence directe sur l'ensemble du produit. Poste basé à Montréal, télétravail disponible 2 jours/semaine.`,
-    requirements: `• 4+ ans en design produit (applications web ou mobile)
-• Maîtrise avancée de Figma (composants, auto-layout, variables)
-• Portfolio démontrant un processus complet : recherche, wireframes, UI, livraison
-• Expérience avec les tests d'utilisabilité et méthodes de recherche qualitative
-• Bonne compréhension des contraintes techniques frontend
-• Atout : expérience en design system ou accessibilité (WCAG)`,
-    salary_range: '95 000 $ – 125 000 $ CAD',
+Our design team is small and high-impact — you will have direct influence over the entire product. Based in Montreal with hybrid remote available 2 days per week.`,
+    requirements: `• 4+ years in product design (web or mobile applications)
+• Advanced Figma proficiency (components, auto-layout, variables)
+• Portfolio demonstrating a full process: research, wireframes, UI, delivery
+• Experience with usability testing and qualitative research methods
+• Strong understanding of frontend technical constraints
+• Nice to have: design system experience or accessibility expertise (WCAG)`,
+    salary_range: '$95,000 – $125,000 CAD',
   },
   {
-    title: 'Ingénieur(e) DevOps & Infrastructure Cloud',
-    department: 'Ingénierie',
+    title: 'DevOps & Cloud Infrastructure Engineer',
+    department: 'Engineering',
     location: 'Vancouver, BC',
     type: 'Full-time',
-    description: `Rejoignez notre équipe infrastructure pour transformer notre façon de déployer, monitorer et scaler nos services. Vous construirez des pipelines CI/CD robustes, automatiserez notre infrastructure et assurerez une fiabilité de classe mondiale.
+    description: `Join our infrastructure team to transform how we deploy, monitor, and scale our services. You will build robust CI/CD pipelines, automate our infrastructure, and ensure world-class reliability for our users across Canada.
 
-Vos responsabilités :
-• Concevoir et gérer notre infrastructure sur AWS (EKS, RDS, CloudFront, S3)
-• Écrire et maintenir le code Terraform pour l'infrastructure-as-code
-• Optimiser nos pipelines GitHub Actions (build, test, déploiement)
-• Mettre en place et améliorer notre stack d'observabilité (Datadog, OpenTelemetry)
-• Travailler avec les équipes dev pour améliorer l'expérience développeur (DX)
-• Participer à la planification de capacité et aux exercices de chaos engineering
+Responsibilities:
+• Design and manage our AWS infrastructure (EKS, RDS, CloudFront, S3)
+• Write and maintain Terraform code following infrastructure-as-code principles
+• Optimize our GitHub Actions pipelines (build, test, deploy)
+• Build and improve our observability stack (Datadog, OpenTelemetry)
+• Partner with development teams to improve the developer experience (DX)
+• Lead capacity planning and chaos engineering exercises
 
-Poste à Vancouver avec télétravail flexible. Notre équipe infrastructure est à l'avant-garde des pratiques DevSecOps au Canada.`,
-    requirements: `• 5+ ans en DevOps, SRE ou ingénierie infrastructure
-• Expérience solide avec AWS (certifications appréciées)
-• Maîtrise de Kubernetes, Helm et des pratiques GitOps
-• Très bonne connaissance de Terraform et des principes IaC
-• Expérience avec les outils de monitoring et d'alerting (Datadog, PagerDuty)
-• Atout : certifications AWS Solutions Architect ou CKA (Kubernetes)`,
-    salary_range: '115 000 $ – 150 000 $ CAD',
+Based in Vancouver with flexible remote options. Our infrastructure team is at the forefront of DevSecOps practices in Canada.`,
+    requirements: `• 5+ years in DevOps, SRE, or infrastructure engineering
+• Solid AWS experience (certifications are a plus)
+• Proficiency with Kubernetes, Helm, and GitOps practices
+• Strong knowledge of Terraform and IaC principles
+• Experience with monitoring and alerting tools (Datadog, PagerDuty)
+• Nice to have: AWS Solutions Architect or CKA (Kubernetes) certification`,
+    salary_range: '$115,000 – $150,000 CAD',
   },
   {
-    title: 'Scientifique des données — IA & Analyse',
-    department: 'Data & Intelligence artificielle',
+    title: 'Data Scientist — AI & Analytics',
+    department: 'Data & AI',
     location: 'Ottawa, ON',
     type: 'Full-time',
-    description: `Nous cherchons un(e) scientifique des données pour transformer nos données en insights actionnables et en fonctionnalités intelligentes. Vous travaillerez à l'intersection des statistiques, du machine learning et du développement produit.
+    description: `We are looking for a data scientist to transform our data into actionable insights and intelligent product features. You will work at the intersection of statistics, machine learning, and product development to solve real problems for our Canadian users.
 
-Vos responsabilités :
-• Concevoir et entraîner des modèles ML pour la personnalisation et la détection d'anomalies
-• Analyser de grands ensembles de données pour identifier des opportunités de croissance
-• Collaborer avec l'ingénierie pour déployer des modèles en production
-• Créer des tableaux de bord et rapports pour les équipes métier
-• Implémenter des pipelines de données ETL fiables et scalables
-• Assurer la gouvernance des données selon les standards canadiens de confidentialité (LPRPDE)
+Responsibilities:
+• Design and train ML models for personalization and anomaly detection
+• Analyze large datasets to identify growth and optimization opportunities
+• Collaborate with engineering to deploy models into production
+• Build dashboards and reports for business and executive teams
+• Implement reliable and scalable ETL data pipelines
+• Ensure data governance and compliance with Canadian privacy standards (PIPEDA)
 
-Notre stack data : Python, PySpark, dbt, Snowflake, Airflow. Basé à Ottawa, avec des interactions régulières avec nos partenaires gouvernementaux.`,
-    requirements: `• 3+ ans en data science ou machine learning appliqué
-• Maîtrise de Python (pandas, scikit-learn, PyTorch ou TensorFlow)
-• Expérience avec SQL avancé et l'optimisation de requêtes analytiques
-• Connaissance des pipelines MLOps (MLflow, Weights & Biases)
-• Compréhension des enjeux de confidentialité des données (LPRPDE/PIPEDA)
-• Atout : expérience avec les LLM, RAG ou NLP en contexte production`,
-    salary_range: '100 000 $ – 135 000 $ CAD',
+Our data stack: Python, PySpark, dbt, Snowflake, Airflow. Based in Ottawa with regular engagement with our government and enterprise partners.`,
+    requirements: `• 3+ years in applied data science or machine learning
+• Proficiency in Python (pandas, scikit-learn, PyTorch or TensorFlow)
+• Advanced SQL and analytical query optimization skills
+• Knowledge of MLOps pipelines (MLflow, Weights & Biases)
+• Understanding of data privacy requirements (PIPEDA/LPRPDE)
+• Nice to have: experience with LLMs, RAG, or production-grade NLP`,
+    salary_range: '$100,000 – $135,000 CAD',
   },
   {
-    title: 'Gestionnaire de Produits — Plateforme B2B',
-    department: 'Produit',
+    title: 'Product Manager — B2B Platform',
+    department: 'Product',
     location: 'Calgary, AB',
     type: 'Full-time',
-    description: `En tant que PM sur notre segment B2B, vous définirez la vision, la stratégie et la roadmap d'une suite de fonctionnalités utilisées par des PME à travers le Canada. Vous travaillerez directement avec les clients, l'ingénierie et la direction.
+    description: `As PM on our B2B segment, you will own the vision, strategy, and roadmap for a suite of features used by small and medium businesses across Canada. You will work directly with customers, engineering, and leadership to prioritize the highest-impact problems.
 
-Vos responsabilités :
-• Définir et prioriser la roadmap produit en collaboration avec la direction
-• Conduire des entretiens clients et analyser les feedbacks pour identifier les besoins
-• Rédiger des PRDs clairs, des user stories et des critères d'acceptation précis
-• Travailler en sprints avec les équipes ingénierie et design (Agile/Shape Up)
-• Suivre les métriques de succès (activation, rétention, NPS, revenus)
-• Coordonner les lancements produits avec le marketing et les ventes
+Responsibilities:
+• Define and prioritize the product roadmap in collaboration with leadership
+• Run customer interviews and analyze feedback to surface real needs
+• Write clear PRDs, user stories, and precise acceptance criteria
+• Work in sprints with engineering and design (Agile / Shape Up)
+• Track and own success metrics (activation, retention, NPS, revenue)
+• Coordinate product launches with marketing and sales teams
 
-Vous évoluerez dans une culture de prise de décision rapide. Basé à Calgary, télétravail 2 jours/semaine et déplacements occasionnels à Montréal, Toronto, Vancouver.`,
-    requirements: `• 4+ ans en gestion de produits (idéalement B2B ou SaaS)
-• Capacité à synthétiser données qualitatives et quantitatives en décisions
-• Excellentes compétences de communication en français et en anglais
-• Expérience avec des outils produit : Jira, Linear, Productboard, Figma
-• Sens aigu des priorités et capacité à dire non avec bienveillance
-• Atout : expérience avec des produits destinés aux PME canadiennes`,
-    salary_range: '100 000 $ – 130 000 $ CAD',
+You will thrive in a culture of fast decisions and real autonomy. Based in Calgary with hybrid remote (2 days/week) and occasional travel to Montreal, Toronto, and Vancouver for customer visits.`,
+    requirements: `• 4+ years in product management (ideally B2B or SaaS)
+• Ability to synthesize qualitative and quantitative data into clear decisions
+• Excellent written and verbal communication skills in English (French is a plus)
+• Hands-on with product tools: Jira, Linear, Productboard, Figma
+• Strong prioritization instincts and ability to say no with empathy
+• Nice to have: experience building products for Canadian SMBs`,
+    salary_range: '$100,000 – $130,000 CAD',
   },
   {
-    title: 'Responsable Marketing & Croissance',
+    title: 'Marketing & Growth Manager',
     department: 'Marketing',
     location: 'Remote — Canada',
     type: 'Full-time',
-    description: `Rejoignez notre équipe pour piloter notre stratégie d'acquisition et de notoriété à travers le Canada. Vous construirez et exécuterez des campagnes multicanales, gérerez notre présence en ligne et développerez des partenariats stratégiques.
+    description: `Join our team to drive acquisition strategy and brand awareness across Canada. You will build and execute multichannel campaigns, manage our online presence, and develop strategic partnerships that fuel our growth.
 
-Vos responsabilités :
-• Élaborer et exécuter la stratégie marketing (contenu, SEO, paid, événements)
-• Gérer le budget marketing et optimiser le ratio CAC/LTV
-• Créer du contenu de haute qualité pour notre blog, LinkedIn et newsletters
-• Collaborer avec les ventes pour aligner les efforts de génération de leads
-• Analyser les performances des campagnes et itérer rapidement
-• Représenter la marque lors d'événements sectoriels au Canada (2–3 conférences/an)
+Responsibilities:
+• Develop and execute the full marketing strategy (content, SEO, paid, events)
+• Own the marketing budget and optimize CAC/LTV ratios
+• Create high-quality content for our blog, LinkedIn, and newsletters
+• Partner with sales to align demand generation efforts
+• Analyze campaign performance and iterate quickly on what works
+• Represent the brand at Canadian industry events (2–3 conferences per year)
 
-Poste 100 % remote au Canada. Déplacements occasionnels pour des événements clés.`,
-    requirements: `• 4+ ans en marketing B2B, idéalement en SaaS ou tech
-• Maîtrise du marketing de contenu, SEO et campagnes payantes (Google Ads, LinkedIn)
-• Expérience avec HubSpot, Salesforce ou des CRM similaires
-• Excellente plume en français et en anglais
-• Analytique : à l'aise avec Google Analytics, Looker ou des outils équivalents
-• Atout : réseau dans l'écosystème startup canadien (Waterloo, Montréal, Vancouver)`,
-    salary_range: '90 000 $ – 115 000 $ CAD',
+100% remote anywhere in Canada. Occasional travel for key events and team offsites.`,
+    requirements: `• 4+ years in B2B marketing, ideally in SaaS or tech
+• Proficiency in content marketing, SEO, and paid campaigns (Google Ads, LinkedIn)
+• Experience with HubSpot, Salesforce, or similar CRM tools
+• Strong writer in English (French is a strong asset)
+• Data-driven: comfortable with Google Analytics, Looker, or equivalent
+• Nice to have: existing network in the Canadian startup ecosystem`,
+    salary_range: '$90,000 – $115,000 CAD',
   },
   {
-    title: 'Développeur(se) Mobile — React Native',
-    department: 'Ingénierie',
-    location: 'Québec, QC',
+    title: 'QA Engineer — Automation & Quality',
+    department: 'Engineering',
+    location: 'Edmonton, AB',
     type: 'Full-time',
-    description: `Notre application mobile, utilisée par plus de 200 000 Canadiens, a besoin de vous. Vous serez responsable de nouvelles fonctionnalités, de l'optimisation des performances et de l'expérience utilisateur sur iOS et Android.
+    description: `Join our quality engineering team to ensure our platform meets the highest standards of reliability and user experience. You will design and implement automated test suites, catch regressions before they reach users, and champion quality across all product teams.
 
-Vos responsabilités :
-• Développer et maintenir notre application React Native (iOS et Android)
-• Collaborer avec le design pour des animations et transitions fluides
-• Intégrer des APIs backend et gérer l'état applicatif (Redux Toolkit ou Zustand)
-• Assurer une couverture de tests solide (Jest, Detox)
-• Publier les mises à jour sur l'App Store et Google Play
-• Optimiser les performances (temps de démarrage, consommation mémoire)
+Responsibilities:
+• Build and maintain end-to-end and integration test suites (Playwright, Cypress)
+• Define and enforce testing standards across frontend and backend teams
+• Implement performance and load testing to ensure scalability
+• Collaborate with developers to shift quality left in the development process
+• Triage and investigate production incidents and reported bugs
+• Create clear documentation for QA processes and test plans
 
-Poste basé à Québec au sein d'une équipe soudée et bienveillante. Télétravail 3 jours/semaine disponible.`,
-    requirements: `• 3+ ans de développement mobile (React Native ou natif iOS/Android)
-• Bonne maîtrise de JavaScript et TypeScript
-• Expérience avec les APIs REST et la gestion d'état côté client
-• Connaissance du cycle de publication App Store et Google Play
-• Souci du détail pour les micro-interactions et la fluidité de l'UI
-• Atout : expérience avec Expo, Reanimated ou MMKV`,
-    salary_range: '95 000 $ – 125 000 $ CAD',
+Based in Edmonton with hybrid remote available (3 days/week). You will work across all squads as a quality advocate.`,
+    requirements: `• 3+ years in QA engineering or software testing
+• Strong experience with test automation frameworks (Playwright, Cypress, or Selenium)
+• Solid understanding of REST API testing (Postman, REST-assured)
+• Experience with CI/CD integration for automated test pipelines
+• Analytical mindset with strong attention to detail
+• Nice to have: performance testing experience (k6, Locust, JMeter)`,
+    salary_range: '$85,000 – $110,000 CAD',
+  },
+  {
+    title: 'Mobile Developer — React Native',
+    department: 'Engineering',
+    location: 'Québec City, QC',
+    type: 'Full-time',
+    description: `Our mobile app, used by over 200,000 Canadians, needs you. You will own new features, performance improvements, and the user experience across iOS and Android.
+
+Responsibilities:
+• Develop and maintain our React Native application (iOS and Android)
+• Collaborate with design to build smooth animations and fluid transitions
+• Integrate backend APIs and manage client-side state (Redux Toolkit or Zustand)
+• Ensure solid test coverage (Jest, Detox)
+• Own releases on the App Store and Google Play
+• Optimize app performance (startup time, memory usage, bundle size)
+
+Based in Quebec City as part of a tight-knit, supportive team. Hybrid remote available 3 days per week.`,
+    requirements: `• 3+ years of mobile development (React Native or native iOS/Android)
+• Strong proficiency in JavaScript and TypeScript
+• Experience with REST APIs and client-side state management
+• Familiarity with the App Store and Google Play release process
+• Attention to detail for micro-interactions and UI smoothness
+• Nice to have: experience with Expo, Reanimated, or MMKV`,
+    salary_range: '$95,000 – $125,000 CAD',
   },
 ]
 
 async function seed() {
-  console.log('Suppression des postes existants...')
+  console.log('Clearing existing job listings...')
   await sql`DELETE FROM job_listings`
   await sql`ALTER SEQUENCE job_listings_id_seq RESTART WITH 1`
 
-  console.log(`Insertion de ${JOBS.length} postes canadiens...`)
+  console.log(`Inserting ${JOBS.length} Canadian job listings...`)
 
   for (const job of JOBS) {
     await sql`
@@ -213,7 +237,7 @@ async function seed() {
   }
 
   const count = await sql`SELECT COUNT(*) AS n FROM job_listings`
-  console.log(`\n✅ ${count[0].n} postes insérés avec succès.`)
+  console.log(`\n✅ ${count[0].n} job listings inserted successfully.`)
 }
 
 seed().catch(err => { console.error(err); process.exit(1) })
