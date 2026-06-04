@@ -62,3 +62,9 @@ export async function getAdminStats(token) {
   if (!res.ok) throw new Error('Failed to fetch stats')
   return res.json()
 }
+
+export async function getApplicationStatus(token) {
+  const res = await fetch(`/api/track/${token}`)
+  if (!res.ok) throw new Error('Application not found')
+  return res.json()
+}
