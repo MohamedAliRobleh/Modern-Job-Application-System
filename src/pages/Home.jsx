@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import JobsGrid from '../components/JobsGrid'
+import CultureSection from '../components/CultureSection'
 import { getJobs } from '../lib/api'
 
 const ORG_NAME = import.meta.env.VITE_ORG_NAME || 'Us'
@@ -35,7 +36,7 @@ export default function Home() {
               <a href="#positions" className="btn btn-light btn-lg px-4 fw-semibold" style={{ color: 'var(--primary)' }}>
                 View Open Positions
               </a>
-              <a href="#why-join" className="btn btn-outline-light btn-lg px-4">Learn More</a>
+              <a href="#culture" className="btn btn-outline-light btn-lg px-4">Learn More</a>
             </div>
           </motion.div>
 
@@ -63,26 +64,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="why-join" className="py-5" style={{ background: 'var(--primary-light)' }}>
-        <div className="container">
-          <h2 className="fw-bold text-center mb-5" style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}>Why Join Us?</h2>
-          <div className="row g-4">
-            {[
-              { icon: '🚀', title: 'Grow Fast', text: 'Accelerate your career with hands-on challenges and mentorship from industry leaders.' },
-              { icon: '🤝', title: 'Great Culture', text: 'We foster a collaborative, inclusive environment where every voice is heard.' },
-              { icon: '💡', title: 'Innovate Daily', text: 'Work on meaningful problems with the freedom to experiment and build.' },
-            ].map(card => (
-              <div key={card.title} className="col-12 col-md-4">
-                <div className="card p-4 text-center h-100">
-                  <div className="fs-1 mb-3">{card.icon}</div>
-                  <h5 className="fw-bold mb-2" style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}>{card.title}</h5>
-                  <p className="text-muted small mb-0">{card.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <CultureSection />
 
       <section className="py-5">
         <div className="container">
