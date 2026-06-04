@@ -1,7 +1,9 @@
 {
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
+  "rewrites": [
+    { "source": "/jobs/:id", "destination": "/index.html" },
+    { "source": "/apply/:id", "destination": "/index.html" },
+    { "source": "/track/:token", "destination": "/index.html" },
+    { "source": "/admin", "destination": "/index.html" },
+    { "source": "/admin/dashboard", "destination": "/index.html" }
   ]
 }
