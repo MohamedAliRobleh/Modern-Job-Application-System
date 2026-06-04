@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import ApplicationForm from '../components/ApplicationForm'
+import MultiStepForm from '../components/MultiStepForm'
 import { getJob } from '../lib/api'
 
 export default function Apply() {
@@ -36,7 +36,7 @@ export default function Apply() {
               <p className="text-muted small">📍 {job.location} · {job.type}</p>
             </div>
             <div className="card p-4 p-md-5">
-              <ApplicationForm job={job} />
+              <MultiStepForm job={job} />
             </div>
           </motion.div>
         )}
