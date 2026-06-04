@@ -1,3 +1,4 @@
+// api/applications/index.js
 import { neon } from '@neondatabase/serverless'
 import { TransactionalEmailsApi, SendSmtpEmail, ApiClient } from '@getbrevo/brevo'
 
@@ -43,11 +44,13 @@ export default async function handler(req, res) {
         ${heard_from || null}, ${visa_sponsorship || null}, ${work_authorized || null},
         ${start_date || null}
       )
-      RETURNING id
+      RETURNING id, tracking_token
     `
 
     const orgName = process.env.VITE_ORG_NAME || 'Our Company'
     const hrEmail = process.env.VITE_HR_EMAIL
+    const baseUrl = process.env.APP_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '')
+    const trackingUrl = baseUrl ? `${baseUrl}/track/${rows[0].tracking_token}` : null
     const brevo = getBrevoClient()
     const date = new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })
 
@@ -58,7 +61,8 @@ export default async function handler(req, res) {
         <h2>Thank you, ${full_name}!</h2>
         <p>We've received your application for <strong>${job_title}</strong> at ${orgName}.</p>
         <p><strong>Submitted:</strong> ${date}</p>
-        <p>Our team reviews applications within 5–10 business days. We'll be in touch if your profile is a match.</p>
+        ${trackingUrl ? `<p><a href="${trackingUrl}" style="display:inline-block;background:#2563eb;color:white;padding:10px 20px;border-radius:6px;text-decoration:none">Track Your Application →</a></p>` : ''}
+        <p>Our team reviews applications within 5–10 business days.</p>
         <p>Best regards,<br/>${orgName} Recruiting Team</p>
       `,
     })
@@ -74,10 +78,6 @@ export default async function handler(req, res) {
             <tr><td style="padding:8px;border:1px solid #e2e8f0"><strong>Email</strong></td><td style="padding:8px;border:1px solid #e2e8f0">${email}</td></tr>
             <tr><td style="padding:8px;border:1px solid #e2e8f0"><strong>Phone</strong></td><td style="padding:8px;border:1px solid #e2e8f0">${phone}</td></tr>
             <tr><td style="padding:8px;border:1px solid #e2e8f0"><strong>Position</strong></td><td style="padding:8px;border:1px solid #e2e8f0">${job_title}</td></tr>
-            <tr><td style="padding:8px;border:1px solid #e2e8f0"><strong>Experience</strong></td><td style="padding:8px;border:1px solid #e2e8f0">${years_experience || '—'}</td></tr>
-            <tr><td style="padding:8px;border:1px solid #e2e8f0"><strong>Availability</strong></td><td style="padding:8px;border:1px solid #e2e8f0">${availability || '—'}</td></tr>
-            <tr><td style="padding:8px;border:1px solid #e2e8f0"><strong>Expected Salary</strong></td><td style="padding:8px;border:1px solid #e2e8f0">${expected_salary || '—'}</td></tr>
-            <tr><td style="padding:8px;border:1px solid #e2e8f0"><strong>LinkedIn</strong></td><td style="padding:8px;border:1px solid #e2e8f0">${linkedin_url || '—'}</td></tr>
             <tr><td style="padding:8px;border:1px solid #e2e8f0"><strong>Resume</strong></td><td style="padding:8px;border:1px solid #e2e8f0"><a href="${resume_url}">Download</a></td></tr>
             ${cover_letter ? `<tr><td style="padding:8px;border:1px solid #e2e8f0"><strong>Cover Letter</strong></td><td style="padding:8px;border:1px solid #e2e8f0">${cover_letter.slice(0, 500)}${cover_letter.length > 500 ? '…' : ''}</td></tr>` : ''}
           </table>
@@ -85,7 +85,7 @@ export default async function handler(req, res) {
       })
     }
 
-    res.json({ id: rows[0].id })
+    res.json({ id: rows[0].id, tracking_token: rows[0].tracking_token })
   } catch {
     res.status(500).json({ error: 'Internal server error' })
   }

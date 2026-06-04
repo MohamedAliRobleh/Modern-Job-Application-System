@@ -27,4 +27,10 @@ describe('SuccessModal', () => {
     render(<MemoryRouter><SuccessModal {...props} show={false} /></MemoryRouter>)
     expect(screen.queryByText(/Jane Doe/)).not.toBeInTheDocument()
   })
+
+  it('shows tracking link when trackingToken is provided', () => {
+    render(<MemoryRouter><SuccessModal {...props} trackingToken="abc-123" /></MemoryRouter>)
+    expect(screen.getByText(/Track your application/i)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /View your application status/i })).toBeInTheDocument()
+  })
 })

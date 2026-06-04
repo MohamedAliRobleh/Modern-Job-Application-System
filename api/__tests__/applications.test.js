@@ -32,7 +32,7 @@ describe('POST /api/applications', () => {
   })
 
   it('inserts application and sends two emails', async () => {
-    mockQuery.mockResolvedValue([{ id: 'new-uuid' }])
+    mockQuery.mockResolvedValue([{ id: 'new-uuid', tracking_token: 'track-token-abc' }])
     mockSendEmail.mockResolvedValue({})
 
     const req = {
@@ -48,7 +48,7 @@ describe('POST /api/applications', () => {
 
     await handler(req, res)
 
-    expect(res.json).toHaveBeenCalledWith({ id: 'new-uuid' })
+    expect(res.json).toHaveBeenCalledWith({ id: 'new-uuid', tracking_token: 'track-token-abc' })
     expect(mockSendEmail).toHaveBeenCalledTimes(2)
   })
 
