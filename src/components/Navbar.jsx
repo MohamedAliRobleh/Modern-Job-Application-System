@@ -48,7 +48,7 @@ export default function Navbar() {
             <li className="nav-item">
               <Link className="nav-link" to="/">Open Positions</Link>
             </li>
-            {isSignedIn ? (
+            {isSignedIn && (
               <>
                 <li className="nav-item">
                   <Link className="nav-link" to="/admin/dashboard">Dashboard</Link>
@@ -59,12 +59,6 @@ export default function Navbar() {
                   </button>
                 </li>
               </>
-            ) : (
-              <li className="nav-item">
-                <Link className="btn btn-outline-primary btn-sm" to="/admin">
-                  Admin Login
-                </Link>
-              </li>
             )}
           </ul>
         </div>

@@ -25,9 +25,9 @@ describe('Navbar', () => {
     expect(screen.getByRole('navigation')).toBeInTheDocument()
   })
 
-  it('renders Admin Login link when not signed in', () => {
+  it('hides Admin Login when not signed in', () => {
     render(<MemoryRouter><Navbar /></MemoryRouter>)
-    expect(screen.getByText(/admin login/i)).toBeInTheDocument()
+    expect(screen.queryByText(/admin login/i)).not.toBeInTheDocument()
   })
 
   it('renders Dashboard and Sign Out when signed in', () => {
@@ -35,6 +35,5 @@ describe('Navbar', () => {
     render(<MemoryRouter><Navbar /></MemoryRouter>)
     expect(screen.getByText(/dashboard/i)).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /sign out/i })).toBeInTheDocument()
-    expect(screen.queryByText(/admin login/i)).not.toBeInTheDocument()
   })
 })
