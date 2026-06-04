@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, Fragment } from 'react'
 import { useAuth } from '@clerk/clerk-react'
 import toast from 'react-hot-toast'
 import Navbar from '../components/Navbar'
@@ -168,8 +168,8 @@ export default function AdminDashboard() {
                 </thead>
                 <tbody>
                   {applications.map(app => (
-                    <>
-                      <tr key={app.id} style={{ cursor: 'pointer' }}
+                    <Fragment key={app.id}>
+                      <tr style={{ cursor: 'pointer' }}
                         onClick={() => setExpandedId(expandedId === app.id ? null : app.id)}>
                         <td className="small">{new Date(app.created_at).toLocaleDateString()}</td>
                         <td>
@@ -201,7 +201,7 @@ export default function AdminDashboard() {
                       </tr>
 
                       {expandedId === app.id && (
-                        <tr key={`${app.id}-exp`} style={{ background: 'var(--primary-light)' }}>
+                        <tr style={{ background: 'var(--primary-light)' }}>
                           <td colSpan={8} className="p-4">
                             <div className="row g-3">
                               {app.cover_letter && (
@@ -236,7 +236,7 @@ export default function AdminDashboard() {
                           </td>
                         </tr>
                       )}
-                    </>
+                    </Fragment>
                   ))}
                 </tbody>
               </table>
