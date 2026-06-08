@@ -25,7 +25,7 @@ export default function App() {
         <Route path="/jobs/:id" element={<JobDetail />} />
         <Route path="/apply/:id" element={<Apply />} />
         <Route path="/track/:token" element={<TrackApplication />} />
-        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin/*" element={<AdminLogin />} />
         <Route
           path="/admin/dashboard"
           element={
