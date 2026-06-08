@@ -58,7 +58,8 @@ export default async function handler(req, res) {
           })
           uploadDone = true
           res.json({ url: blob.url })
-        } catch {
+        } catch (err) {
+          console.error('Upload failed:', err)
           if (!res.writableEnded) res.status(500).json({ error: 'Upload failed' })
         } finally {
           resolve()
