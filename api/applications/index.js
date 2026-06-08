@@ -1,19 +1,18 @@
 // api/applications/index.js
 import { neon } from '@neondatabase/serverless'
-import { TransactionalEmailsApi, SendSmtpEmail, ApiClient } from '@getbrevo/brevo'
+import { BrevoClient } from '@getbrevo/brevo'
 
 function getBrevoClient() {
-  ApiClient.instance.authentications['api-key'].apiKey = process.env.BREVO_API_KEY
-  return TransactionalEmailsApi()
+  return new BrevoClient({ apiKey: process.env.BREVO_API_KEY })
 }
 
-async function sendEmail(api, { to, subject, html }) {
-  const email = new SendSmtpEmail()
-  email.to = [{ email: to }]
-  email.subject = subject
-  email.htmlContent = html
-  email.sender = { email: 'noreply@careers.com', name: process.env.VITE_ORG_NAME || 'Careers' }
-  await api.sendTransacEmail(email)
+async function sendEmail(brevo, { to, subject, html }) {
+  await brevo.transactionalEmails.sendTransacEmail({
+    to: [{ email: to }],
+    subject,
+    htmlContent: html,
+    sender: { email: 'noreply@careers.com', name: process.env.VITE_ORG_NAME || 'Careers' },
+  })
 }
 
 export default async function handler(req, res) {

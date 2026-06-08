@@ -12,9 +12,7 @@ vi.mock('@clerk/backend', () => ({
 
 const mockSendEmail = vi.fn()
 vi.mock('@getbrevo/brevo', () => ({
-  TransactionalEmailsApi: vi.fn(() => ({ sendTransacEmail: mockSendEmail })),
-  SendSmtpEmail: vi.fn(function(d) { Object.assign(this, d) }),
-  ApiClient: { instance: { authentications: { 'api-key': { apiKey: '' } } } },
+  BrevoClient: vi.fn(function () { this.transactionalEmails = { sendTransacEmail: mockSendEmail } }),
 }))
 
 const { default: handler } = await import('../admin/applications/[id].js')

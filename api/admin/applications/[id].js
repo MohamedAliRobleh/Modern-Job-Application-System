@@ -1,11 +1,10 @@
 // api/admin/applications/[id].js
 import { neon } from '@neondatabase/serverless'
-import { TransactionalEmailsApi, SendSmtpEmail, ApiClient } from '@getbrevo/brevo'
+import { BrevoClient } from '@getbrevo/brevo'
 import { requireAuth } from '../../_auth.js'
 
 function getBrevoClient() {
-  ApiClient.instance.authentications['api-key'].apiKey = process.env.BREVO_API_KEY
-  return TransactionalEmailsApi()
+  return new BrevoClient({ apiKey: process.env.BREVO_API_KEY })
 }
 
 const STATUS_EMAIL = {
@@ -32,14 +31,14 @@ async function notifyApplicant(email, full_name, job_title, newStatus) {
   if (!template) return
 
   const orgName = process.env.VITE_ORG_NAME || 'Our Company'
-  const api = getBrevoClient()
-  const msg = new SendSmtpEmail()
-  msg.to = [{ email }]
-  msg.subject = template.subject
-  msg.htmlContent = template.body(full_name, job_title, orgName) +
-    `<p style="margin-top:24px">Best regards,<br/>${orgName} Recruiting Team</p>`
-  msg.sender = { email: 'noreply@careers.com', name: orgName }
-  await api.sendTransacEmail(msg)
+  const brevo = getBrevoClient()
+  await brevo.transactionalEmails.sendTransacEmail({
+    to: [{ email }],
+    subject: template.subject,
+    htmlContent: template.body(full_name, job_title, orgName) +
+      `<p style="margin-top:24px">Best regards,<br/>${orgName} Recruiting Team</p>`,
+    sender: { email: 'noreply@careers.com', name: orgName },
+  })
 }
 
 export default async function handler(req, res) {
