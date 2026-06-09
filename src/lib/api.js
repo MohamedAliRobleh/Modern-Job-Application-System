@@ -68,3 +68,13 @@ export async function getApplicationStatus(token) {
   if (!res.ok) throw new Error('Application not found')
   return res.json()
 }
+
+export async function getATSReview(applicationId, token) {
+  const res = await fetch('/api/ai/ats-review', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+    body: JSON.stringify({ applicationId }),
+  })
+  if (!res.ok) throw new Error('ATS review failed')
+  return res.json()
+}

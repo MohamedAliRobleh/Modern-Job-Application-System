@@ -1,10 +1,95 @@
-import { useState, useEffect, useCallback, Fragment } from 'react'
+import { useState, useEffect, useCallback, useRef, Fragment } from 'react'
 import { useAuth } from '@clerk/clerk-react'
 import toast from 'react-hot-toast'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import StatusBadge from '../components/StatusBadge'
-import { getAdminStats, getAdminApplications, updateApplication, deleteApplication } from '../lib/api'
+import { getAdminStats, getAdminApplications, updateApplication, deleteApplication, getATSReview } from '../lib/api'
+
+const REC_COLOR = { 'STRONG HIRE': '#22c55e', 'HIRE': '#3b82f6', 'MAYBE': '#f59e0b', 'NO HIRE': '#ef4444' }
+const REC_BADGE = { 'STRONG HIRE': 'success', 'HIRE': 'primary', 'MAYBE': 'warning', 'NO HIRE': 'danger' }
+
+function ScoreRing({ score }) {
+  const color = score >= 75 ? '#22c55e' : score >= 50 ? '#f59e0b' : '#ef4444'
+  const r = 38, circ = 2 * Math.PI * r
+  const dash = (score / 100) * circ
+  return (
+    <div style={{ position: 'relative', width: 96, height: 96, flexShrink: 0 }}>
+      <svg width="96" height="96" style={{ transform: 'rotate(-90deg)' }}>
+        <circle cx="48" cy="48" r={r} fill="none" stroke="#e5e7eb" strokeWidth="8" />
+        <circle cx="48" cy="48" r={r} fill="none" stroke={color} strokeWidth="8"
+          strokeDasharray={`${dash} ${circ}`} strokeLinecap="round"
+          style={{ transition: 'stroke-dasharray 0.8s ease' }} />
+      </svg>
+      <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <span style={{ fontWeight: 800, fontSize: '1.5rem', lineHeight: 1, color }}>{score}</span>
+        <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>/100</span>
+      </div>
+    </div>
+  )
+}
+
+function ATSReport({ data }) {
+  return (
+    <div>
+      <div className="d-flex align-items-start gap-3 mb-4">
+        <ScoreRing score={data.score} />
+        <div>
+          <span className={`badge bg-${REC_BADGE[data.recommendation] || 'secondary'} mb-2`}
+            style={{ fontSize: '0.85rem', letterSpacing: '0.05em' }}>
+            {data.recommendation}
+          </span>
+          <p className="text-muted small mb-0">{data.summary}</p>
+        </div>
+      </div>
+
+      <div className="row g-3 mb-3">
+        <div className="col-md-6">
+          <p className="fw-semibold small mb-2">✅ Matched Keywords</p>
+          <div className="d-flex flex-wrap gap-1">
+            {data.matched_keywords.map(k => (
+              <span key={k} className="badge rounded-pill"
+                style={{ background: '#dcfce7', color: '#15803d', fontSize: '0.75rem' }}>{k}</span>
+            ))}
+          </div>
+        </div>
+        <div className="col-md-6">
+          <p className="fw-semibold small mb-2">❌ Missing Keywords</p>
+          <div className="d-flex flex-wrap gap-1">
+            {data.missing_keywords.map(k => (
+              <span key={k} className="badge rounded-pill"
+                style={{ background: '#fee2e2', color: '#b91c1c', fontSize: '0.75rem' }}>{k}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="row g-3 mb-3">
+        <div className="col-md-6">
+          <p className="fw-semibold small mb-2">💪 Strengths</p>
+          <ul className="small ps-3 mb-0" style={{ lineHeight: 1.7 }}>
+            {data.strengths.map((s, i) => <li key={i}>{s}</li>)}
+          </ul>
+        </div>
+        {data.concerns.length > 0 && (
+          <div className="col-md-6">
+            <p className="fw-semibold small mb-2">⚠️ Concerns</p>
+            <ul className="small ps-3 mb-0" style={{ lineHeight: 1.7 }}>
+              {data.concerns.map((c, i) => <li key={i}>{c}</li>)}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      <div>
+        <p className="fw-semibold small mb-2">🎯 Suggested Interview Questions</p>
+        <ol className="small ps-3 mb-0" style={{ lineHeight: 1.9 }}>
+          {data.interview_questions.map((q, i) => <li key={i}>{q}</li>)}
+        </ol>
+      </div>
+    </div>
+  )
+}
 
 const STATUSES = ['New', 'Reviewing', 'Interview', 'Offer', 'Rejected']
 
@@ -42,6 +127,9 @@ export default function AdminDashboard() {
   const [noteModal, setNoteModal] = useState(null)
   const [noteText, setNoteText] = useState('')
   const [deleteModal, setDeleteModal] = useState(null)
+  const [atsModal, setAtsModal] = useState(null)
+  const [atsResult, setAtsResult] = useState(null)
+  const atsCache = useRef(new Map())
 
   const fetchStats = useCallback(async () => {
     try {
@@ -100,6 +188,23 @@ export default function AdminDashboard() {
       setDeleteModal(null)
       toast.success('Application deleted')
     } catch { toast.error('Failed to delete') }
+  }
+
+  const handleATSReview = async (app) => {
+    setAtsModal(app)
+    if (atsCache.current.has(app.id)) {
+      setAtsResult({ loading: false, data: atsCache.current.get(app.id) })
+      return
+    }
+    setAtsResult({ loading: true })
+    try {
+      const token = await getToken()
+      const data = await getATSReview(app.id, token)
+      atsCache.current.set(app.id, data)
+      setAtsResult({ loading: false, data })
+    } catch (err) {
+      setAtsResult({ loading: false, error: err.message })
+    }
   }
 
   return (
@@ -192,6 +297,11 @@ export default function AdminDashboard() {
                               <a href={app.resume_url} target="_blank" rel="noopener noreferrer"
                                 className="btn btn-outline-primary btn-sm">Resume</a>
                             )}
+                            <button className="btn btn-sm fw-semibold"
+                              onClick={() => handleATSReview(app)}
+                              style={{ background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', color: 'white', border: 'none', fontSize: '0.75rem' }}>
+                              🤖 AI Review
+                            </button>
                             <button className="btn btn-outline-secondary btn-sm"
                               onClick={() => { setNoteModal(app.id); setNoteText(app.notes || '') }}>Note</button>
                             <button className="btn btn-outline-danger btn-sm"
@@ -281,6 +391,39 @@ export default function AdminDashboard() {
                 <div className="d-flex gap-2 justify-content-end">
                   <button className="btn btn-outline-secondary" onClick={() => setDeleteModal(null)}>Cancel</button>
                   <button className="btn btn-danger" onClick={handleDelete}>Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ATS AI Review Modal */}
+        {atsModal && (
+          <div className="modal d-block" style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}
+            onClick={() => { setAtsModal(null); setAtsResult(null) }}>
+            <div className="modal-dialog modal-lg modal-dialog-scrollable" onClick={e => e.stopPropagation()}>
+              <div className="modal-content">
+                <div className="modal-header border-0 pb-0">
+                  <div>
+                    <h5 className="fw-bold mb-0" style={{ background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                      🤖 AI ATS Review
+                    </h5>
+                    <p className="text-muted small mb-0">{atsModal.full_name} — {atsModal.job_title}</p>
+                  </div>
+                  <button className="btn-close" onClick={() => { setAtsModal(null); setAtsResult(null) }} />
+                </div>
+                <div className="modal-body pt-3">
+                  {!atsResult || atsResult.loading ? (
+                    <div className="text-center py-5">
+                      <div className="spinner-border mb-3"
+                        style={{ color: '#8b5cf6', width: '2.5rem', height: '2.5rem' }} />
+                      <p className="text-muted small">Claude is analyzing the application…</p>
+                    </div>
+                  ) : atsResult.error ? (
+                    <div className="alert alert-danger">{atsResult.error}</div>
+                  ) : (
+                    <ATSReport data={atsResult.data} />
+                  )}
                 </div>
               </div>
             </div>
